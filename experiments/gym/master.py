@@ -25,7 +25,11 @@ class MasterAgent():
     print(self.state_size, self.action_size)
 
     self.global_model = ActorCriticModel(self.state_size, self.action_size)  # global network
-    self.global_model(tf.convert_to_tensor(np.random.random((1, self.state_size)), dtype=tf.float32))
+    self.global_model(
+      tf.convert_to_tensor(
+        np.random.random((1, self.state_size)), # pylint: disable=no-member
+        dtype=tf.float32)
+    )
 
   def train(self):
     if self.args.algorithm == 'random':
