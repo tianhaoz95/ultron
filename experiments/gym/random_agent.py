@@ -23,11 +23,10 @@ class RandomAgent:
       reward_sum = 0.0
       steps = 0
       while not done:
-        # Sample randomly from the action space and step
-        _, reward, done, _ = self.env.step(self.env.action_space.sample())
+        action = self.env.action_space.sample()
+        _, reward, done, _ = self.env.step(action)
         steps += 1
         reward_sum += reward
-      # Record statistics
       self.global_moving_average_reward = record(
             episode,
             reward_sum, 
