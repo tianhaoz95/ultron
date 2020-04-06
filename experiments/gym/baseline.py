@@ -3,11 +3,11 @@ from queue import Queue
 from utils import record
 
 class RandomAgent:
-  """Random Agent that will play the specified game
-
-    Arguments:
-      env_name: Name of the environment to be played
-      max_eps: Maximum number of episodes to run agent for.
+  """
+  Random Agent that will play the specified game
+  Arguments:
+    env_name: Name of the environment to be played
+    max_eps: Maximum number of episodes to run agent for.
   """
   def __init__(self, env_name, max_eps):
     self.env = gym.make(env_name)
@@ -28,13 +28,12 @@ class RandomAgent:
         steps += 1
         reward_sum += reward
       self.global_moving_average_reward = record(
-            episode,
-            reward_sum, 
-            0,
-            self.global_moving_average_reward,
-            self.res_queue, 0, steps
+          episode,
+          reward_sum, 
+          0,
+          self.global_moving_average_reward,
+          self.res_queue, 0, steps
         )
-
       reward_avg += reward_sum
     final_avg = reward_avg / float(self.max_episodes)
     print("Average score across {} episodes: {}".format(self.max_episodes, final_avg))
