@@ -1,6 +1,7 @@
 import gym
 import argparse
 from master import MasterAgent
+from toy import toyrun
 
 parser = argparse.ArgumentParser(description='Run A3C algorithm on the game '
                                              'Cartpole.')
@@ -8,6 +9,8 @@ parser.add_argument('--algorithm', default='a3c', type=str,
                     help='Choose between \'a3c\' and \'random\'.')
 parser.add_argument('--train', dest='train', action='store_true',
                     help='Train our model.')
+parser.add_argument('--toy', dest='toy', action='store_true',
+                    help='Just play the cartpole environment')
 parser.add_argument('--lr', default=0.001,
                     help='Learning rate for the shared optimizer.')
 parser.add_argument('--update-freq', default=20, type=int,
@@ -22,8 +25,11 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
   print(args)
-  master = MasterAgent(args)
-  if args.train:
-    master.train()
+  if args.toy:
+    toyrun()
   else:
-    master.play()
+    master = MasterAgent(args)
+    if args.train:
+      master.train()
+    else:
+      master.play()
