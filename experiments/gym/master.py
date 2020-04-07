@@ -71,8 +71,8 @@ class MasterAgent():
     state = env.reset()
     model = self.global_model
     model_path = os.path.join(self.save_dir, 'model_{}.h5'.format(self.game_name))
-    print('Loading model from: {}'.format(model_path))
     if self.args.algorithm != 'random':
+      print('Loading model from: {}'.format(model_path))
       model.load_weights(model_path)
     done = False
     step_counter = 0
@@ -81,7 +81,7 @@ class MasterAgent():
     try:
       while not done:
         env.render(mode='rgb_array')
-        policy, value = model(tf.convert_to_tensor(state[None, :], dtype=tf.float32))
+        policy, _ = model(tf.convert_to_tensor(state[None, :], dtype=tf.float32))
         policy = tf.nn.softmax(policy)
         action = np.argmax(policy)
         state, reward, done, _ = env.step(action)
