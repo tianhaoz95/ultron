@@ -15,7 +15,7 @@ parser.add_argument('--lr', default=0.001,
                     help='Learning rate for the shared optimizer.')
 parser.add_argument('--update-freq', default=20, type=int,
                     help='How often to update the global model.')
-parser.add_argument('--max-eps', default=1000, type=int,
+parser.add_argument('--max-eps', default=2000, type=int,
                     help='Global maximum number of episodes to run.')
 parser.add_argument('--gamma', default=0.99,
                     help='Discount factor of rewards.')
