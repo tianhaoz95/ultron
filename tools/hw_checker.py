@@ -2,7 +2,7 @@ import tensorflow as tf
 import GPUtil
 
 def check():
-  print(tf.version)
+  print('Tensorflow version' + tf.__version__)
   try:
     tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
     print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
