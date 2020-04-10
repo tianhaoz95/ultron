@@ -33,3 +33,4 @@ if __name__ == '__main__':
       master.train()
     else:
       master.play()
+  print('All done!')
