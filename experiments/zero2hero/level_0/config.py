@@ -1,0 +1,11 @@
+default_num_iterations = 10000
+default_initial_collect_steps = 1000
+default_collect_steps_per_iteration = 1
+default_replay_buffer_max_length = 100000
+default_batch_size = 512
+default_learning_rate = 1e-3
+default_log_interval = 200
+default_num_eval_episodes = 10
+default_eval_interval = 1000
+default_checkpoint_saver_directory = "./checkpoints"
+default_model_saver_directory = "./models"
