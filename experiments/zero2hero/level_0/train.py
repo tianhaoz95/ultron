@@ -68,8 +68,10 @@ def train_model(
     checkpoint_saver_directory=config.default_checkpoint_saver_directory,
     model_saver_directory=config.default_model_saver_directory,
     visualize=False,
+    static_plot=False,
 ):
     if visualize:
+
         import streamlit as st
     env_name = 'CartPole-v0'
     # test_drive(env_name=env_name)
@@ -113,17 +115,17 @@ def train_model(
         replay_buffer=replay_buffer,
     )
     train_checkpointer.initialize_or_restore()
-    collect_data(train_env, random_policy, replay_buffer, steps=100)
+    # collect_data(train_env, random_policy, replay_buffer, steps=100)
     dataset = replay_buffer.as_dataset(
         num_parallel_calls=3,
-        sample_batch_size=256,
+        sample_batch_size=batch_size,
         num_steps=2).prefetch(3)
     print("Dataset sample: ")
     print(dataset)
     # training loop
     iterator = iter(dataset)
     agent.train_step_counter.assign(0)
-    avg_return = compute_avg_return(eval_env, agent.policy, 10)
+    avg_return = compute_avg_return(eval_env, agent.policy, num_eval_episodes)
     returns = []
     loss = []
     max_avg_return = 0.0
@@ -140,7 +142,7 @@ def train_model(
         if visualize:
             loss_chart.add_rows([train_loss])
         step = agent.train_step_counter.numpy()
-        avg_return = compute_avg_return(eval_env, agent.policy, 10)
+        avg_return = compute_avg_return(eval_env, agent.policy, num_eval_episodes)
         if visualize:
             return_chart.add_rows([avg_return])
         print('step={0}/{1}: avg_return={2}, loss={3}'.format(
@@ -150,4 +152,8 @@ def train_model(
             model_saver.save(model_saver_directory)
         train_checkpointer.save(step)
         returns.append(avg_return)
+        if static_plot:
+            fig, (ax1, ax2) = plt.subplots(2)
+            ax1.plot(avg_return)
+            ax2.plot(returns)
     print('Done')

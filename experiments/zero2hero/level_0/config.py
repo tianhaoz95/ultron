@@ -1,6 +1,6 @@
-default_num_iterations = 10000
+default_num_iterations = 20000
 default_initial_collect_steps = 1000
-default_collect_steps_per_iteration = 1
+default_collect_steps_per_iteration = 10
 default_replay_buffer_max_length = 100000
 default_batch_size = 512
 default_learning_rate = 1e-3
