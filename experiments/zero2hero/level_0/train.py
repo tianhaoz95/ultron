@@ -2,7 +2,6 @@ import config
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
-import streamlit as st
 from tf_agents.policies.policy_saver import PolicySaver
 from tf_agents.environments import suite_gym
 from tf_agents.environments import tf_py_environment
@@ -68,7 +67,10 @@ def train_model(
     eval_interval=config.default_eval_interval,
     checkpoint_saver_directory=config.default_checkpoint_saver_directory,
     model_saver_directory=config.default_model_saver_directory,
+    visualize=False,
 ):
+    if visualize:
+        import streamlit as st
     env_name = 'CartPole-v0'
     # test_drive(env_name=env_name)
     train_py_env = suite_gym.load(env_name)
@@ -125,19 +127,22 @@ def train_model(
     returns = []
     loss = []
     max_avg_return = 0.0
-    st.title(body="Average return") # pylint: disable=no-value-for-parameter
-    return_chart = st.line_chart(returns)
-    st.title(body="Loss") # pylint: disable=no-value-for-parameter
-    loss_chart = st.line_chart(loss)
+    if visualize:
+        st.title(body="Average return") # pylint: disable=no-value-for-parameter
+        return_chart = st.line_chart(returns)
+        st.title(body="Loss") # pylint: disable=no-value-for-parameter
+        loss_chart = st.line_chart(loss)
     for _ in range(num_iterations):
         for _ in range(collect_steps_per_iteration):
             collect_step(train_env, agent.collect_policy, replay_buffer)
         experience, unused_info = next(iterator)
         train_loss = agent.train(experience).loss
-        loss_chart.add_rows([train_loss])
+        if visualize:
+            loss_chart.add_rows([train_loss])
         step = agent.train_step_counter.numpy()
         avg_return = compute_avg_return(eval_env, agent.policy, 10)
-        return_chart.add_rows([avg_return])
+        if visualize:
+            return_chart.add_rows([avg_return])
         print('step={0}/{1}: avg_return={2}, loss={3}'.format(
             step, num_iterations, avg_return, train_loss))
         if avg_return > max_avg_return:
