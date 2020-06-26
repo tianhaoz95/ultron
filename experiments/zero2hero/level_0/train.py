@@ -71,7 +71,6 @@ def train_model(
     static_plot=False,
 ):
     if visualize:
-
         import streamlit as st
     env_name = 'CartPole-v0'
     # test_drive(env_name=env_name)
@@ -156,4 +155,5 @@ def train_model(
             fig, (ax1, ax2) = plt.subplots(2)
             ax1.plot(avg_return)
             ax2.plot(returns)
+            plt.show()
     print('Done')
