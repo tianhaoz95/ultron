@@ -14,21 +14,6 @@ from tf_agents.utils import common
 from tf_agents.utils.common import Checkpointer
 from tensorflow.keras.optimizers import Adam
 
-
-def test_drive(env_name):
-    test_env = suite_gym.load(env_name)
-    print('Action spec:')
-    print(test_env.action_spec())
-    test_env.reset()
-    time_step = test_env.reset()
-    print("Time step: ")
-    print(time_step)
-    action = np.array(1, dtype=np.int32)
-    next_time_step = test_env.step(action)
-    print('Next time step:')
-    print(next_time_step)
-
-
 def compute_avg_return(environment, policy, num_episodes=10):
     total_return = 0.0
     for _ in range(num_episodes):
@@ -74,7 +59,6 @@ def train_model(
     if visualize:
         import streamlit as st
     env_name = 'CartPole-v0'
-    # test_drive(env_name=env_name)
     train_py_env = suite_gym.load(env_name)
     eval_py_env = suite_gym.load(env_name)
     train_env = tf_py_environment.TFPyEnvironment(train_py_env)
@@ -94,9 +78,7 @@ def train_model(
         td_errors_loss_fn=common.element_wise_squared_loss,
         train_step_counter=train_step_counter)
     agent.initialize()
-    eval_policy = agent.policy
     model_saver = PolicySaver(policy=agent.policy)
-    collect_policy = agent.collect_policy
     random_policy = random_tf_policy.RandomTFPolicy(
         train_env.time_step_spec(), train_env.action_spec())
     sample_avg_return = compute_avg_return(
