@@ -126,7 +126,9 @@ def train_model(
     agent.train_step_counter.assign(0)
     avg_return = compute_avg_return(eval_env, agent.policy, num_eval_episodes)
     returns = []
+    returns_history = []
     loss = []
+    loss_history = []
     max_avg_return = 0.0
     if visualize:
         st.title(body="Average return") # pylint: disable=no-value-for-parameter
@@ -138,22 +140,23 @@ def train_model(
             collect_step(train_env, agent.collect_policy, replay_buffer)
         experience, unused_info = next(iterator)
         train_loss = agent.train(experience).loss
-        if visualize:
-            loss_chart.add_rows([train_loss])
         step = agent.train_step_counter.numpy()
         avg_return = compute_avg_return(eval_env, agent.policy, num_eval_episodes)
         if visualize:
+            loss_chart.add_rows([train_loss])
             return_chart.add_rows([avg_return])
+        else:
+            loss_history.append(train_loss)
+            returns_history.append(avg_return)
         print('step={0}/{1}: avg_return={2}, loss={3}'.format(
             step, num_iterations, avg_return, train_loss))
         if avg_return > max_avg_return:
-            avg_return = max_avg_return
+            max_avg_return = avg_return
             model_saver.save(model_saver_directory)
         train_checkpointer.save(step)
-        returns.append(avg_return)
         if static_plot:
             fig, (ax1, ax2) = plt.subplots(2)
-            ax1.plot(avg_return)
-            ax2.plot(returns)
+            ax1.plot(returns_history)
+            ax2.plot(loss_history)
             plt.show()
     print('Done')
