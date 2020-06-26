@@ -7,5 +7,6 @@ default_learning_rate = 1e-3
 default_log_interval = 200
 default_num_eval_episodes = 10
 default_eval_interval = 1000
+default_static_plot_interval = 100
 default_checkpoint_saver_directory = "./checkpoints"
 default_model_saver_directory = "./models"

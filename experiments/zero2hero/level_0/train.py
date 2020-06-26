@@ -69,6 +69,7 @@ def train_model(
     model_saver_directory=config.default_model_saver_directory,
     visualize=False,
     static_plot=False,
+    static_plot_interval=config.default_static_plot_interval,
 ):
     if visualize:
         import streamlit as st
@@ -154,9 +155,11 @@ def train_model(
             max_avg_return = avg_return
             model_saver.save(model_saver_directory)
         train_checkpointer.save(step)
-        if static_plot:
+        if step % static_plot_interval and static_plot:
             fig, (ax1, ax2) = plt.subplots(2)
             ax1.plot(returns_history)
+            ax1.set_title('Reward history')
             ax2.plot(loss_history)
+            ax2.set_title('Loss history')
             plt.show()
     print('Done')
