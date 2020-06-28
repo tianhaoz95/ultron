@@ -1,4 +1,4 @@
-from train import train_model
+from experiments.zero2hero.level_0_1.src.train import train_model
 
 
 def main():

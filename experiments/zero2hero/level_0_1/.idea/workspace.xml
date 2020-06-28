@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="840dfb32-b0d8-450e-acc1-cf57d7274495" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../.idea/runConfigurations/zero2hero__level_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../.idea/runConfigurations/zero2hero__level_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../level_0/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../level_0/src/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../level_0/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../level_0/src/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../level_0/entrypoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/../level_0/entrypoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../level_0/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../level_0/src/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../level_0/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../level_0/src/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrypoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrypoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../requirements.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1dvycOlANSzig8n8yy0ohJfHc30" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="840dfb32-b0d8-450e-acc1-cf57d7274495" name="Default Changelist" comment="" />
+      <created>1593319939394</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593319939394</updated>
+    </task>
+    <servers />
+  </component>
+</project>

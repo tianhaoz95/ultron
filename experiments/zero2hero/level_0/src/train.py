@@ -1,4 +1,3 @@
-import config
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -13,6 +12,8 @@ from tf_agents.replay_buffers import tf_uniform_replay_buffer
 from tf_agents.utils import common
 from tf_agents.utils.common import Checkpointer
 from tensorflow.keras.optimizers import Adam
+from . import config
+
 
 def compute_avg_return(environment, policy, num_episodes=10):
     total_return = 0.0
@@ -42,19 +43,19 @@ def collect_data(env, policy, buffer, steps):
 
 
 def train_model(
-    num_iterations=config.default_num_iterations,
-    collect_steps_per_iteration=config.default_collect_steps_per_iteration,
-    replay_buffer_max_length=config.default_replay_buffer_max_length,
-    batch_size=config.default_batch_size,
-    learning_rate=config.default_learning_rate,
-    log_interval=config.default_log_interval,
-    num_eval_episodes=config.default_num_eval_episodes,
-    eval_interval=config.default_eval_interval,
-    checkpoint_saver_directory=config.default_checkpoint_saver_directory,
-    model_saver_directory=config.default_model_saver_directory,
-    visualize=False,
-    static_plot=False,
-    static_plot_interval=config.default_static_plot_interval,
+        num_iterations=config.default_num_iterations,
+        collect_steps_per_iteration=config.default_collect_steps_per_iteration,
+        replay_buffer_max_length=config.default_replay_buffer_max_length,
+        batch_size=config.default_batch_size,
+        learning_rate=config.default_learning_rate,
+        log_interval=config.default_log_interval,
+        num_eval_episodes=config.default_num_eval_episodes,
+        eval_interval=config.default_eval_interval,
+        checkpoint_saver_directory=config.default_checkpoint_saver_directory,
+        model_saver_directory=config.default_model_saver_directory,
+        visualize=False,
+        static_plot=False,
+        static_plot_interval=config.default_static_plot_interval,
 ):
     if visualize:
         import streamlit as st
@@ -83,7 +84,7 @@ def train_model(
         train_env.time_step_spec(), train_env.action_spec())
     sample_avg_return = compute_avg_return(
         eval_env, random_policy, num_eval_episodes)
-    print("Sample average return with random policy: ")
+    print("sample average return with random policy: ")
     print(sample_avg_return)
     replay_buffer = tf_uniform_replay_buffer.TFUniformReplayBuffer(
         data_spec=agent.collect_data_spec,
@@ -98,14 +99,14 @@ def train_model(
     )
     train_checkpointer.initialize_or_restore()
     # collect_data(train_env, random_policy, replay_buffer, steps=100)
-    dataset = replay_buffer.as_dataset(
+    date_set = replay_buffer.as_dataset(
         num_parallel_calls=3,
         sample_batch_size=batch_size,
         num_steps=2).prefetch(3)
-    print("Dataset sample: ")
-    print(dataset)
+    print("data set sample: ")
+    print(date_set)
     # training loop
-    iterator = iter(dataset)
+    iterator = iter(date_set)
     agent.train_step_counter.assign(0)
     avg_return = compute_avg_return(eval_env, agent.policy, num_eval_episodes)
     returns = []
@@ -114,9 +115,9 @@ def train_model(
     loss_history = []
     max_avg_return = 0.0
     if visualize:
-        st.title(body="Average return") # pylint: disable=no-value-for-parameter
+        st.title(body="Average return")
         return_chart = st.line_chart(returns)
-        st.title(body="Loss") # pylint: disable=no-value-for-parameter
+        st.title(body="Loss")
         loss_chart = st.line_chart(loss)
     for _ in range(num_iterations):
         for _ in range(collect_steps_per_iteration):

@@ -1,5 +1,5 @@
-from train import train_model
-from test import test_model
+from experiments.zero2hero.level_0.src.train import train_model
+from experiments.zero2hero.level_0.src.test import test_model
 
 def main():
   # train_model(visualize=True)
